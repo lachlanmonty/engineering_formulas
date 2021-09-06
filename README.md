@@ -1,2 +1,2 @@
-# engineering_formulas
-General mechanical / piping engineering calculations.
+# Engineering Formulas
+Mechanical / piping engineering calculations.
