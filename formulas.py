@@ -57,3 +57,56 @@ def bingham_darcy_friction_factor(d_m, v, rho, t_0, mu_b):
     f_d = (f_L**m+f_T**m)**(1/m)
 
     return f_d
+
+
+def oroskar_settling_velocity(D, d, S, C_c, p_f, u_f, X = 1, g = 9.81):
+    
+    r'''Calculates the settling or critical velocity for a slurry with a 
+    significant portion of fines and coarse particles. [1]
+       
+    Parameters
+    ----------
+    D : float
+        Pipe inner diameter [m]
+    d : float
+        Particle diameter [m]
+    S : float
+        Ratio of the coarse solid density to carrier fluid density, ps/pf [-]
+    C_c : float
+        Coarse particle volume fraction (i.e. particles exceeding 74 um) [-]
+    p_f : float
+        Carrier fluid, including fines density [kg/m]
+    u_f : float
+        Carrier fluid dynamic viscosity [Pa.s]
+    X : float
+        Hindered settling factor (1) [-]
+    g : float
+        Gravitational acceleration (9.81) [m/s2]
+
+    Returns
+    -------
+    V_ot : float
+        Oroskar and Turian (1980) critical velocity [m/s]
+    
+    Examples
+    --------
+    >>> oroskar_settling_velocity(TBC)
+    TBC
+    
+    References
+    ----------
+    .. [1] AP Poloski et.al, Deposition Velocities of Newtonian and
+    Non-Newtonian Slurries in Pipelines. 2009.
+    https://www.pnnl.gov/rpp-wtp/documents/WTP-RPT-175.pdf
+
+    '''
+        
+    V_ot = ((g*d*(S-1))**0.5)*\
+    (\
+        (1.85*C_c**0.1536)*\
+        ((1-C_c)**0.3567)*\
+        ((D/d)**0.378)*\
+        (((p_f*D*((g*d*(S-1))**0.5))/u_f)**0.09)*\
+        (X**0.3)
+    )
+    return V_ot
