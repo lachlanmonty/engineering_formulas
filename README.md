@@ -1,2 +1,2 @@
 # Engineering Formulas
-Useful mechanical / piping engineering calculations.
+Mechanical / piping engineering calculations.
