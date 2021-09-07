@@ -110,3 +110,10 @@ def oroskar_settling_velocity(D, d, S, C_c, p_f, u_f, X = 1, g = 9.81):
         (X**0.3)
     )
     return V_ot
+
+
+def pump_power(q_m3h, rho, head, efficiency, g = 9.81):
+
+    P_kw = round((((q_m3h/60/60)* rho * g * head)/ efficiency)/1000,2)
+
+    return P_kw
