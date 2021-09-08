@@ -95,7 +95,7 @@ def oroskar_settling_velocity(D, d, S, C_c, p_f, u_f, X = 1, g = 9.81):
     
     References
     ----------
-    .. [1] AP Poloski et.al, Deposition Velocities of Newtonian and
+    .. [1] AP Poloski et al., Deposition Velocities of Newtonian and
     Non-Newtonian Slurries in Pipelines. 2009.
     https://www.pnnl.gov/rpp-wtp/documents/WTP-RPT-175.pdf
 
