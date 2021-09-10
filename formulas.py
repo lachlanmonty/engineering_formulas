@@ -153,25 +153,4 @@ def api_standard_520_part1_sizing(d_m, v, rho, t_0, mu_b):
 
     '''
 
-    N_re = d_m*v*rho/mu_b
-
-    N_he = d_m**2*rho*t_0/mu_b**2
-
-    # Laminar
-    f_L = 16/N_re*(1+1/6*(N_he/N_re))
-    
-    for i in range(10):
-        f_L = 16/N_re*(1+1/6*(N_he/N_re)-((N_he**4)/(3*f_L**3*N_re**7)))  
-        
-    f_L = 4 * f_L       # Converts to Darcy Friction Factor
-    
-    # Turbulent
-    a = -1.47*(1+0.146*np.exp(-2.9*10**-5*N_he))
-    f_T = 4 * (10**a/N_re**0.193)
-    
-    # Combine
-    m = 1.7+40000/N_re
-        
-    f_d = (f_L**m+f_T**m)**(1/m)
-
-    return f_d
+    return
