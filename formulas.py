@@ -199,7 +199,7 @@ def cema_area(BW, beta, phi):
     return A_s
 
     
-def required_area(bulk_density, tonnage, belt_velocity):
+def req_conv_area(bulk_density, tonnage, belt_velocity):
     r'''### Required Area for Mass Flow
 
     The conveyed bulk material cross sectional area, A, can be calculated from
