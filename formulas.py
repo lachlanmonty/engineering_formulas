@@ -1,4 +1,4 @@
-import numpy as np
+import math
 
 
 def bingham_darcy_friction_factor(d_m, v, rho, t_0, mu_b):
@@ -48,7 +48,7 @@ def bingham_darcy_friction_factor(d_m, v, rho, t_0, mu_b):
     f_L = 4 * f_L       # Converts to Darcy Friction Factor
     
     # Turbulent
-    a = -1.47*(1+0.146*np.exp(-2.9*10**-5*N_he))
+    a = -1.47*(1+0.146*math.exp(-2.9*10**-5*N_he))
     f_T = 4 * (10**a/N_re**0.193)
     
     # Combine
@@ -154,3 +154,74 @@ def api_standard_520_part1_sizing(d_m, v, rho, t_0, mu_b):
     '''
 
     return
+
+
+def cema_area(BW, beta, phi):
+    r'''### CEMA Standard Capacity Cross Sectional Area, $A_s$
+
+    Equation 4.15 is used to calculate, As, for standard CEMA three equal roll 
+    roughing idlers based on the average CEMA center roll length circular 
+    surcharge surface and the CEMA standard belt edge. [1]
+
+    Parameters
+    ----------
+    - BW : float
+        - Belt Width, [mm]
+    - $\beta$ : float
+        - Idler trough angle, [deg]
+    - $\phi_s$ : float
+        - Material surcharge angle, [deg]
+        
+    Returns
+    -------
+    - $A_s$ : float
+        - CEMA Standard Cross Sectional Area, area based on three equal roll 
+        CEMA troughing idler, the surcharge angle with circular top surface, 
+        and standard edge distance, [m²]
+
+    '''
+    beta =  math.radians(beta)
+    phi  =  math.radians(phi)
+
+    bc = (0.371 * BW + 6.35)/BW         # Equation 4.11
+    bw = (1-bc)/2                       # Equation 4.13
+    bwe = (0.055 * BW + 22.9)/BW        # Equation 4.12
+    bwmc = bw - bwe
+    rsch = ((bc/2)/(math.sin(phi)))+((math.cos(beta)*bwmc)/(math.sin(phi)))
+
+    A_s = 2*BW**2 * \
+        (rsch**2*((phi/2)-((math.sin(phi)*math.cos(phi))/2)))+\
+        ((bc/2) * bwmc * math.sin(beta)) + \
+        (bwmc**2 * ((math.sin(beta) * math.cos(beta))/2))
+
+    A_s = A_s / 1000**2                 # Convert to m²
+
+    return A_s
+
+    
+def required_area(bulk_density, tonnage, belt_velocity):
+    r'''### Required Area for Mass Flow
+
+    The conveyed bulk material cross sectional area, A, can be calculated from
+    the design inputs for tonnage, Q, belt speed, V, bulk density, $\gamma_m$,
+    and $\Theta $ = 0 degrees.  [1]
+
+    Formula
+    ----------
+    $$ A = \frac{Q}{V \gamma_m} $$
+    
+    Parameters
+    ----------
+    - $\gamma_m$ : float
+        - Conveyed bulk density, [kg/m³]
+    - $Q$ : float
+        - Bulk material tonage, [t/h]
+    - $V$ : float
+        - Belt speed, [m/s]
+    
+    Returns
+    -------
+    - $A$ : float
+        - Required conveyed cross sectional area, [m²]
+    '''
+    return (tonnage * 1000/60/60) / (belt_velocity * bulk_density)
