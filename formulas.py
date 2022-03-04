@@ -1,6 +1,5 @@
 import math
 
-
 def bingham_darcy_friction_factor(d_m, v, rho, t_0, mu_b):
     
     r"""Calculates the Darcy friction factor for a Bingham plastic.
@@ -61,7 +60,7 @@ def bingham_darcy_friction_factor(d_m, v, rho, t_0, mu_b):
 
 def oroskar_settling_velocity(D, d, S, C_c, p_f, u_f, X = 1, g = 9.81):
     
-    r'''Calculates the settling or critical velocity for a slurry with a 
+    r"""Calculates the settling or critical velocity for a slurry with a 
     significant portion of fines and coarse particles. [1]
        
     Parameters
@@ -99,7 +98,7 @@ def oroskar_settling_velocity(D, d, S, C_c, p_f, u_f, X = 1, g = 9.81):
     Non-Newtonian Slurries in Pipelines. 2009.
     https://www.pnnl.gov/rpp-wtp/documents/WTP-RPT-175.pdf
 
-    '''
+    """
         
     V_ot = ((g*d*(S-1))**0.5)*\
     (\
@@ -122,7 +121,7 @@ def pump_power(q_m3h, rho, head, efficiency, g = 9.81):
 
 def api_standard_520_part1_sizing(d_m, v, rho, t_0, mu_b):
     
-    r'''Calculates required size for rupture disc with liquid medium. [1]
+    r"""Calculates required size for rupture disc with liquid medium. [1]
        
     Parameters
     ----------
@@ -151,13 +150,13 @@ def api_standard_520_part1_sizing(d_m, v, rho, t_0, mu_b):
     ----------
     .. [1] Ron Darby, Chemical Engineering Fluid Mechanics. 2nd edition. 2001.
 
-    '''
+    """
 
     return
 
 
 def cema_area(BW, beta, phi):
-    r'''### CEMA Standard Capacity Cross Sectional Area, $A_s$
+    r"""CEMA Standard Capacity Cross Sectional Area, $A_s$
 
     Equation 4.15 is used to calculate, As, for standard CEMA three equal roll 
     roughing idlers based on the average CEMA center roll length circular 
@@ -179,7 +178,7 @@ def cema_area(BW, beta, phi):
         CEMA troughing idler, the surcharge angle with circular top surface, 
         and standard edge distance, [m²]
 
-    '''
+    """
     beta =  math.radians(beta)
     phi  =  math.radians(phi)
 
@@ -198,9 +197,8 @@ def cema_area(BW, beta, phi):
 
     return A_s
 
-    
 def req_conv_area(bulk_density, tonnage, belt_velocity):
-    r'''### Required Area for Mass Flow
+    r"""Required Area for Mass Flow
 
     The conveyed bulk material cross sectional area, A, can be calculated from
     the design inputs for tonnage, Q, belt speed, V, bulk density, $\gamma_m$,
@@ -223,5 +221,5 @@ def req_conv_area(bulk_density, tonnage, belt_velocity):
     -------
     - $A$ : float
         - Required conveyed cross sectional area, [m²]
-    '''
+    """
     return (tonnage * 1000/60/60) / (belt_velocity * bulk_density)
