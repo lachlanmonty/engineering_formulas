@@ -3,7 +3,7 @@ import math
 
 def bingham_darcy_friction_factor(d_m, v, rho, t_0, mu_b):
     
-    r'''Calculates the Darcy friction factor for a Bingham plastic.
+    r"""Calculates the Darcy friction factor for a Bingham plastic.
     Calculated for any Reynolds number, from laminar through turbulent. [1]
        
     Parameters
@@ -33,7 +33,7 @@ def bingham_darcy_friction_factor(d_m, v, rho, t_0, mu_b):
     ----------
     .. [1] Ron Darby, Chemical Engineering Fluid Mechanics. 2nd edition. 2001.
 
-    '''
+    """
 
     N_re = d_m*v*rho/mu_b
 
