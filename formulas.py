@@ -1,4 +1,5 @@
 import math
+import numpy as np
 
 
 def bingham_darcy_friction_factor(d_m, v, rho, t_0, mu_b):
